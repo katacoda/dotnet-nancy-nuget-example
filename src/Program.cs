@@ -1,7 +1,7 @@
 ﻿namespace Nancy.Demo.Hosting.Docker
 {
-    using Microsoft.Owin.Hosting;
     using System;
+    using Nancy.Hosting.Self;
     using Mono.Unix;
     using Mono.Unix.Native;
 
@@ -11,20 +11,23 @@
         {
             var port = 8080;
 
-            using (WebApp.Start<Startup>(string.Format("http://+:{0}", port)))
-            {
-                Console.WriteLine("Nancy started. Listening on http://+:" + port);
+            var host = new NancyHost(new Uri("http://+:" + port));
+            host.Start();
 
-                if (IsRunningOnMono())
-                {
-                    var terminationSignals = GetUnixTerminationSignals();
-                    UnixSignal.WaitAny(terminationSignals);
-                }
-                else
-                {
-                    Console.ReadLine();
-                }
+            Console.WriteLine("Nancy started. Listening on http://+:" + port);
+
+            if (IsRunningOnMono())
+            {
+                var terminationSignals = GetUnixTerminationSignals();
+                UnixSignal.WaitAny(terminationSignals);
             }
+            else
+            {
+                Console.ReadLine();
+            }
+
+            Console.WriteLine("Stopping Nancy");
+            host.Stop();
         }
 
         private static bool IsRunningOnMono()

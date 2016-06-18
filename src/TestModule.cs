@@ -4,16 +4,15 @@ namespace Nancy.Demo.Hosting.Docker
     {
         public TestModule()
         {
-            Get["/"] = parameters => {
+            Get("/", args => {
                 System.Console.WriteLine("Visit: / on " + System.Environment.MachineName);
-                return View["staticview", Request.Url];
-            };
+                return View["staticview", this.Request.Url];
+            });
 
-            Get["/machine"] = parameters =>
-            {
+            Get("/machine", args => {
                 System.Console.WriteLine("Visit: /machine on " + System.Environment.MachineName);
                 return "Request processed by " + System.Environment.MachineName + "\r\n";
-            };
+            });
         }
     }
 }
