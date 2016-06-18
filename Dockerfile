@@ -1,4 +1,4 @@
-FROM ocelotuproar/docker-alpine-mono
+FROM ocelotuproar/docker-alpine-mono:4.4
 
 RUN         mkdir -p /src
 WORKDIR     /src
