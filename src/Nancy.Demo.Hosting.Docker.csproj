@@ -72,10 +72,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nancy">
-      <HintPath>..\packages\Nancy.2.0.0-alpha\lib\net45\Nancy.dll</HintPath>
+      <HintPath>..\packages\Nancy.2.0-Pre1751\lib\net45\Nancy.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Hosting.Self">
-      <HintPath>..\packages\Nancy.Hosting.Self.2.0.0-alpha\lib\net45\Nancy.Hosting.Self.dll</HintPath>
+      <HintPath>..\packages\Nancy.Hosting.Self.2.0-Pre1751\lib\net45\Nancy.Hosting.Self.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Posix">
       <HintPath>..\packages\Mono.Posix.4.0.0.0\lib\net40\Mono.Posix.dll</HintPath>

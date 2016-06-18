@@ -11,7 +11,7 @@
         {
             var port = 8080;
 
-            var host = new NancyHost(new Uri("http://+:" + port));
+            var host = new NancyHost(new Uri("http://localhost:" + port));
             host.Start();
 
             Console.WriteLine("Nancy started. Listening on http://+:" + port);
