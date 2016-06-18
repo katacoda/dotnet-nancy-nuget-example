@@ -2,6 +2,8 @@
 {
     using Microsoft.Owin.Hosting;
     using System;
+    using Mono.Unix;
+    using Mono.Unix.Native;
 
     class Program
     {
@@ -11,14 +13,34 @@
 
             using (WebApp.Start<Startup>(string.Format("http://+:{0}", port)))
             {
-                Console.WriteLine("Nancy now listening on http://+:" + port);
+                Console.WriteLine("Nancy started. Listening on http://+:" + port);
 
-                var line = Console.ReadLine();
-                while (line != "quit")
+                if (IsRunningOnMono())
                 {
-                    line = Console.ReadLine();
+                    var terminationSignals = GetUnixTerminationSignals();
+                    UnixSignal.WaitAny(terminationSignals);
+                }
+                else
+                {
+                    Console.ReadLine();
                 }
             }
+        }
+
+        private static bool IsRunningOnMono()
+        {
+            return Type.GetType("Mono.Runtime") != null;
+        }
+
+        private static UnixSignal[] GetUnixTerminationSignals()
+        {
+            return new[]
+            {
+              new UnixSignal(Signum.SIGINT),
+              new UnixSignal(Signum.SIGTERM),
+              new UnixSignal(Signum.SIGQUIT),
+              new UnixSignal(Signum.SIGHUP)
+            };
         }
     }
 }

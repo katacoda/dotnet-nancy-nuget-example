@@ -103,6 +103,8 @@
     </Reference>
     <Reference Include="System.Xml">
     </Reference>
+    <Reference Include="Mono.Posix.dll">
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
