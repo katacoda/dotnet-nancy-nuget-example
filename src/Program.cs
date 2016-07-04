@@ -1,4 +1,4 @@
-﻿namespace Nancy.Demo.Hosting.Docker
+namespace Nancy.Demo.Hosting.Docker
 {
     using System;
     using Nancy.Hosting.Self;
